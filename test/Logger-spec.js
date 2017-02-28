@@ -10,6 +10,13 @@ import  {
    LogMethodName,
    LogReturned
 } from '../src';
+
+function mergeArgs(spyOrStub) {
+  return Array.from({length: spyOrStub.callCount}, (v, k) => k).map(call =>
+     spyOrStub.getCall(call).args
+  ).reduce((all, next) => [...all, ...next], [])
+}
+
 describe(`Logger`, () => {
   let consoleInfo;
   beforeEach(() => {
@@ -105,6 +112,47 @@ describe(`Logger`, () => {
        expect(consoleInfo.calledTwice).toBeTruthy();
        expect(consoleInfo.getCall(0).args).toInclude('ick');
        expect(consoleInfo.getCall(1).args).toInclude('mouse');
+    });
+
+
+  });
+
+  describe(`LogAll`, () => {
+    let AnyComponent;
+    beforeEach(() => {
+       AnyComponent= (() => {
+         class C extends React.Component {
+            @LogAll
+            handleClick(a, b) {
+             return 'something';
+            }
+            @LogAll  
+            handleMouse() {
+
+            }
+
+            componentDidMount() {
+               this.handleClick('cl', 'ick' );
+               this.handleMouse('mouse');
+            }
+            render() {
+               return (<span></span>)
+            }
+         }
+         return C;
+     })();
+    });
+
+    it(`logs all info about the annotated method including: its classname, its arguments, its returned value.`, () => {
+       mount(<AnyComponent />);
+       expect(consoleInfo.called).toBeTruthy();
+
+       const argsLogging= mergeArgs(consoleInfo);
+       expect(argsLogging).toInclude('handleClick'); // log method name.
+       expect(argsLogging).toInclude('C'); // log class name of the instance that has the annotated method
+       expect(argsLogging).toInclude('mouse'); // log 1ˢᵗ argument of the 2ⁿᵈ call.
+       expect(argsLogging).toInclude('something'); // log returned value.
+
     });
 
 
