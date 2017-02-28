@@ -1,6 +1,6 @@
 {
   "name": "react-annotations",
-  "version": "0.0.2",
+  "version": "0.0.2-RC1",
   "description": "A \"One Stop Shop\" ( hub ) of React @Decorators!",
   "main": "index.js",
   "scripts": {
