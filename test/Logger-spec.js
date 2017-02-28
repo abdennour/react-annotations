@@ -74,4 +74,40 @@ describe(`Logger`, () => {
     });
   });
 
+  describe(`LogArgs`, () => {
+    let AnyComponent;
+    beforeEach(() => {
+       AnyComponent= (() => {
+         class C extends React.Component {
+            @LogArgs
+            handleClick(a, b) {
+             return 'something';
+            }
+
+            @LogArgs
+            handleMouse(a) {
+             return 'something';
+            }
+            componentDidMount() {
+               this.handleClick('cl', 'ick' );
+               this.handleMouse('mouse');
+            }
+            render() {
+               return (<span></span>)
+            }
+         }
+         return C;
+     })();
+    });
+
+    it(`logs arguments`, () => {
+       mount(<AnyComponent />);
+       expect(consoleInfo.calledTwice).toBeTruthy();
+       expect(consoleInfo.getCall(0).args).toInclude('ick');
+       expect(consoleInfo.getCall(1).args).toInclude('mouse');
+    });
+
+
+  });
+
 });

@@ -281,8 +281,8 @@ exports.Log = Log;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function callLogMethodName(methodName) {
-  console.info(methodName);
+function callLogMethodName(methodName, instance) {
+  console.info(methodName, ' method is called within the Class ', instance.constructor.name);
 }
 function callLogArgs(methodName) {
   var _console;
@@ -306,7 +306,7 @@ function LogArgs(target, key, descriptor) {
 function LogMethodName(target, key, descriptor) {
   var fn = descriptor.value;
   descriptor.value = function () {
-    callLogMethodName(key);
+    callLogMethodName(key, target);
     return fn.bind(this).apply(undefined, arguments);
   };
   return descriptor;
@@ -324,6 +324,7 @@ function LogReturned(target, key, descriptor) {
 function LogAll(target, key, descriptor) {
   var fn = descriptor.value;
   descriptor.value = function () {
+    callLogMethodName(key, target);
     callLogArgs.apply(undefined, [key].concat(Array.prototype.slice.call(arguments)));
     var result = fn.bind(this).apply(undefined, arguments);
     callLogReturned(key, result);

@@ -1,7 +1,7 @@
 {
   "name": "react-annotations",
-  "version": "0.0.1",
-  "description": "Still under development. It is not yet mature. Thank you for your understanding!",
+  "version": "0.0.2",
+  "description": "A \"One Stop Shop\" ( hub ) of React @Decorators!",
   "main": "index.js",
   "scripts": {
     "compile": "babel -d lib/ src/   --no-comments",
@@ -20,7 +20,16 @@
     "url": "git+https://github.com/abdennour/react-annotations.git"
   },
   "keywords": [
-      "es7", "react-annotations", "react", "annotations"
+    "es7",
+    "react-annotations",
+    "react",
+    "annotations",
+    "decorators",
+    "hub",
+    "one-stop-shop",
+    "autobind",
+    "click-outside",
+    "logging"
   ],
   "author": "Abdennour TOUMI <http://abdennoor.com>",
   "license": "MIT",
@@ -66,5 +75,9 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^1.16.2",
     "webpack-hot-middleware": "^2.13.2"
+  },
+  "dependencies": {
+    "babel-autobind": "^0.3.4",
+    "react-onclickoutside": "^5.9.0"
   }
 }

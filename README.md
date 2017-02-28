@@ -3,11 +3,9 @@
 
 # Overview :
 
-This package aims to gather all react decorators/annotations.
-It can include also a mature decorators existing in the open-source community. After adopting this decorator, we add it in this package with a reference to its main repository to keep the copyrights.
-Also , there are decorators built from scratch.
+This package aims to be as a hub of react annotations where community gathers all react decorators/annotations here.
 
- We are adopting `annotations` instead of `decorators` since all are capitalized. 
+It  includes also a mature decorators existing in the open-source community. as well as new decorators that are built in this packages (like logger).
 
 # Install
 

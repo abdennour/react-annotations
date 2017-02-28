@@ -1,5 +1,5 @@
-import Autobind from './Autobind';
-import ClickedOutside from './ClickedOutside';
+import {Autobind} from 'babel-autobind';
+import ClickedOutside from 'react-onclickoutside';
 import * as Logger from './Logger';
 
 export {Autobind};
